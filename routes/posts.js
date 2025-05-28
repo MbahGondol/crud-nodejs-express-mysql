@@ -148,4 +148,19 @@ router.post('/update/:id', function (req, res, next) {
     }
 })
 
+router.get('/delete/(:id)', function (req, res, next) {
+    let id = req.params.id;
+
+    connection.query('DELETE FROM tbl_39_post WHERE id = ' + id, function (err, result) {
+        // if (err) throw err
+        if (err) {
+            req.flash('error', err);
+            res.redirect('/posts');
+        } else {
+            req.flash('success', 'Data Berhasil Dihapus Njir!');
+            res.redirect('/posts');
+        }
+    })
+})
+
 module.exports = router;
